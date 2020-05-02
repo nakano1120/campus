@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>僕の理想のキャンパスライフガチャ</title>
+    <style>
+        img{
+            float:left;
+        }
+        body{
+            text-align:center;
+            background-image:url('campus.jpg');
+        }
+        h2.top{
+            color:#ff0000;
+        }
+        .main{
+            background-color:rgba(255,255,255,0.8);
+            margin:0 auto;
+            width:80%;
+            border-radius: 2vw;
+        }
+        .ans{
+            padding:2vw;
+            text-align:left;
+            background-color:rgba(255,255,255,1);
+            margin:10px auto;
+            width:60%;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h2 class="top">僕の理想の<br>キャンパスライフガチャ</h2>
+    </div>
+    <div class="main">
+        現在3人の性格<span id="nanbo"></span>通り
+        名前を入力:<input type="text" id="name"><input type="button" value="送信" onclick="genalate()"><br>
+        ※完全ランダムです。名前を変えなくても結果が変わります。
+    </div>
+    <div class="ans" id="answer">
+
+    </div>
+    <script>
+        const faculty=[
+            "文学部",
+            "教育学部",
+            "人間科学部",
+            "心理学部",
+            "外国語学部",
+            "国際学部",
+            "法学部",
+            "経済学部",
+            "経営学部",
+            "商学部",
+            "理学部",
+            "工学部",
+            "情報学部",
+            "医学部",
+            "薬学部",
+            "歯学部",
+            "看護学部",
+            "保健学部",
+            "福祉学部",
+            "獣医学部",
+            "生物学部",
+            "栄養学部",
+            "家政学部",
+            "美術学部",
+            "体育学部",
+            "音楽学部"
+        ]
+        const otoko=[
+            "和田くん",
+            "しゅうへい",
+            "こうた",
+            "こうき",
+            "拓哉",
+            "てつろうくん",
+            "けいと",
+            "とっしー",
+            "よっしー",
+            "たくろう",
+            "キーモくん",
+            "たけしちゃん",
+            "竹内",
+            "けいすけ",
+            "Dすけ",
+        ]
+        const otokoskyll=[
+            "みんなから恐れられている。<br>大声出したら地球割るんじゃないかという噂も。",
+            "みんなのアイドル。<br>男だけどめちゃくちゃかわいい。",
+            "男の中の男。<br>実は泣き虫。",
+            "中性的な人。<br>性格はまじめで、無遅刻無欠席。",
+            "めっちゃ元気。<br>中学時代は、大人しかったらしい。",
+            "めっちゃ元気。<br>性格はやんちゃで、いつも社長出勤。",
+            "大人しい人。<br>裏は女の子が大好き。",
+            "大人しい人。<br>裏ではめっちゃ怖いらしい。",
+        ]
+        const skyll=[
+            "ごく普通の大学生。<br>マザコン。",
+            "ごく普通の大学生。<br>けっこう八方美人。",
+            "ごく普通の大学生。<br>浪人であることを周囲に隠している。",
+            "ごく普通の大学生。<br>プログラミングが趣味。",
+            "ごく普通の大学生。<br>プログラミングが趣味。",
+            "天才プログラマ。<br>プログラミングはそれほど好きじゃない。",
+            "声優志望。<br>声だけで今までに何十人も落としている。",
+            "みんなのアイドル。<br>寿司屋に行って最初に頼むのはえんがわ。",
+            "みんなのアイドル。<br>めちゃくちゃかわいい。",
+        ]
+        const onna=[
+            "かんなちゃん",
+            "りん",
+            "はなこ",
+            "みゆ",
+            "かおる",
+            "ゆうか",
+            "ひろこ",
+            "すず",
+            "りんごちゃん",
+            "ももか",
+            "ゆか",
+            "京子",
+            "はな",
+            "かなちゃん",
+            "けいこさん"
+        ]
+        const onnaskyll=[
+            "みんなのアイドル。<br>スカウトがめっちゃくるらしい。",
+            "女優をやっている。<br>スタイルがえげつない。",
+            "オタサーの姫。<br>自分では、めっちゃ美人だと思っている。",
+            "オタサーの姫。<br>めっちゃかわいい。",
+            "おしとやかな女性。<br>京都にめっちゃ詳しい。",
+            "おしとやかな女性。<br>喋ると関西弁がきつい。",
+            "おしとやかな女性。<br>Twitterがちょっと予想外だったりする。",
+            "とにかく元気。<br>流行りのアニメとタピオカが大好き。",
+            "不思議な子。<br>タピオカドリンクを、ドリンクだけ先に飲む。",
+            "不思議な子。<br>文化祭は十二単を着ている。。",
+        ]
+        document.getElementById("nanbo").innerHTML=otokoskyll.length*onnaskyll.length*skyll.length
+        function genalate(){
+            let name = document.getElementById("name").value
+            let grade1 = Math.floor(Math.random() * 4) + 1;
+            let faculty1 = faculty[Math.floor(Math.random() * faculty.length)];
+            let skyll1 = skyll[Math.floor(Math.random() * skyll.length)];
+            document.getElementById("answer").innerHTML=("<div><h2>僕（"+name+"）</h2><h3>"+faculty1+"　"+grade1+"年</h3>"+skyll1+"</div>")
+            let ran2 = Math.floor(Math.random() * otoko.length);
+            let dom2 = Math.floor(Math.random() * otokoskyll.length);
+            let grade2 = Math.floor(Math.random() * 4) + 1;
+            let faculty2 = faculty[Math.floor(Math.random() * faculty.length)];
+            let lovemen = "";
+            let randommen = Math.floor(Math.random() * 10);
+            if(randommen<1){
+                lovemen="<br>僕のことが好き。"
+            }
+            let men2=otoko[ran2]
+            let skyll2=otokoskyll[dom2]
+            document.getElementById("answer").innerHTML+=("<div><h2>"+men2+"</h2><h3>"+faculty2+"　"+grade2+"年</h3>"+skyll2+lovemen+"</div>")
+            let ran3 = Math.floor(Math.random() * otoko.length);
+            let dom3 = Math.floor(Math.random() * otokoskyll.length);
+            let grade3 = Math.floor(Math.random() * 4) + 1;
+            let faculty3 = faculty[Math.floor(Math.random() * faculty.length)];
+            let love = "";
+            let random = Math.floor(Math.random() * 3);
+            if(random<1){
+                love="<br>僕のことが好き。"
+            }
+            let men3=onna[ran3]
+            let skyll3=onnaskyll[dom3]
+            document.getElementById("answer").innerHTML+=("<div><h2>"+men3+"</h2><h3>"+faculty3+"　"+grade3+"年</h3>"+skyll3+love+"</div>")
+        }
+    </script>
+</body>
+</html>
